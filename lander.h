@@ -5,7 +5,7 @@
 class Lander
 {
 private:
-   double status;
+   bool status;
    Point pt;
    double angle;
    Point ptUpperRight;
@@ -22,7 +22,7 @@ public:
    bool isFlying();
    Point getPosition();
    int getFuel();
-   void draw(double thrust, ogstream gout);
+   //void draw(double thrust, ogstream gout);
    void input(double thrust);
    void coast();
    void land();

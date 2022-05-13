@@ -22,14 +22,27 @@ class Demo
 public:
    Demo(const Point& ptUpperRight) :
           angle(0.0),
-          ptStar(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(20, 300)),
           ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight),
-          star1(ptUpperRight)
-       
+          ptStar(random(20, 300), random(20, 300))
+     
    { 
+      //Star starArray[50] = { };
+      //Point ptStar;
+      //ptStar.setX(random(20, 300));
+      //ptStar.setY(random(20, 300));
+      //Star star1(ptStar);
+      //for (int i = 0; i < sizeof(starArray); i++)
+      //{
+      //   
+      //   //Star(ptStar);
+      //   
+      //}
+      //      
 
-      phase = random(0, 255);
+
+
+      //phase = random(0, 255);
    }
 
    // this is just for test purposes.  Don't make member variables public!
@@ -38,8 +51,15 @@ public:
    double angle;         // angle the LM is pointing
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
+   Star starArray[50] = { };
    Point ptStar;
-   Star star1;
+
+   //star1(ptStar)
+   //ptStar(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(20, 300)),
+   
+
+
+   
 };
 
 /*************************************

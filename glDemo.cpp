@@ -104,7 +104,7 @@ void callBack(const Interface *pUI, void * p)
 
    /*Star star1(const Point& ptUpperRight);*/
    // Draw a star using Star class
-   pDemo->star1.draw(gout);
+   //pDemo->star1.draw(gout);
   
 }
 

@@ -80,7 +80,7 @@ void callBack(const Interface *pUI, void * p)
    gout << "Velocity (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // draw our little star
-   gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   //gout.drawStar(pDemo->ptStar, pDemo->phase++);
 
    /*Star star1(const Point& ptUpperRight);*/
    // Draw a star using Star class

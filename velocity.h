@@ -1,4 +1,8 @@
 #pragma once
+
+/***********************************************************************
+ * Velocity: change in position divided by time
+ ************************************************************************/
 class Velocity
 {
 private:
@@ -6,13 +10,19 @@ private:
    double dy;
 
 public:
+   // constructors
    Velocity();
    Velocity(double dx, double dy);
+
+   // returns the change in x and change in y
    double getDX();
    double getDY();
    double getSpeed();
+
+   // updates the dx and dy attributes
    void setDX(double dx);
    void setDY(double dy);
+
    double add(double accel, double time);
 
 

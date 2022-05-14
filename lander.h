@@ -1,6 +1,11 @@
 #pragma once
 #include "point.h"
 #include "velocity.h"
+#include "uiDraw.h"
+
+/***********************************************************************
+ * Moon Lander: has all the details for the moon lander
+ ************************************************************************/
 
 class Lander
 {
@@ -21,8 +26,11 @@ public:
    bool isLanded();
    bool isFlying();
    Point getPosition();
+
+   // returns the fuel
    int getFuel();
-   //void draw(double thrust, ogstream gout);
+
+   void draw(double thrust, ogstream gout);
    void input(double thrust);
    void coast();
    void land();

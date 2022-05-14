@@ -1,4 +1,9 @@
 #pragma once
+
+/***********************************************************************
+ * Thrust
+ ************************************************************************/
+
 class Thrust
 {
 private:
@@ -7,12 +12,16 @@ private:
    bool counterClockwise;
 
 public:
+   // constructor
    Thrust();
+
    void rotation();
    void mainEngineThrust();
    bool isMain();
    bool isClock();
    bool isCounter();
+
+   // updates a member variable
    void set(double UI);
 };
 

@@ -24,7 +24,9 @@ public:
           angle(0.0),
           ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight),
-          ptStar(random(20, 300), random(20, 300))
+          /*ptStar(random(20, 300), random(20, 300)),*/
+          ptStar(ptUpperRight.getX() - random(20,300), ptUpperRight.getY() - random(20,300)),
+          star1(ptUpperRight)
      
    { 
       //Star starArray[50] = { };
@@ -42,7 +44,7 @@ public:
 
 
 
-      //phase = random(0, 255);
+      phase = random(0, 255);
    }
 
    // this is just for test purposes.  Don't make member variables public!
@@ -51,8 +53,9 @@ public:
    double angle;         // angle the LM is pointing
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
-   Star starArray[50] = { };
+  /* Star starArray[50] = { };*/
    Point ptStar;
+   Star star1;
 
    //star1(ptStar)
    //ptStar(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(20, 300)),
@@ -96,15 +99,25 @@ void callBack(const Interface *pUI, void * p)
                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen
-   gout.setPosition(Point(300.0, 300.0));
-   gout << "Velocity (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+   gout.setPosition(Point(25.0, 380.0));
+   gout << "Fuel (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+
+   // put some text on the screen
+   gout.setPosition(Point(25.0, 360.0));
+   gout << "Altitude (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+
+   // put some text on the screen
+   gout.setPosition(Point(25.0, 340.0));
+   gout << "Speed (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // draw our little star
-   //gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   gout.drawStar(pDemo->ptStar, pDemo->phase++);
 
    /*Star star1(const Point& ptUpperRight);*/
    // Draw a star using Star class
-   //pDemo->star1.draw(gout);
+   
+   pDemo->star1.draw(gout);
+
   
 }
 

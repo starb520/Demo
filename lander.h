@@ -20,8 +20,13 @@ private:
    double g;
    
 public:
+   // constructor
    Lander(Point ptUpperRight);
+
+   // resets the lander after crash/land
    void reset();
+
+   // stats of the ships condition
    bool isDead();
    bool isLanded();
    bool isFlying();
@@ -30,8 +35,13 @@ public:
    // returns the fuel
    int getFuel();
 
+   // draws Lander
    void draw(double thrust, ogstream gout);
+
+   // converts the input into thrust
    void input(double thrust);
+
+   // condition updates
    void coast();
    void land();
    void crash();

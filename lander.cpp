@@ -4,6 +4,8 @@
  * Moon Lander: has all the details for the moon lander
  ************************************************************************/
 
+
+
 Lander::Lander(Point ptUpperRight)
 {
 }

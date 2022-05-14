@@ -7,13 +7,18 @@
 
 
  /***********************************************************************
-  * Constructors for the Acceleration class
+  * Acceleration
+  * Default constructor
   ************************************************************************/
 Acceleration::Acceleration()
 {
 
 }
 
+/***********************************************************************
+ * Acceleration
+ * Another constructor
+ ************************************************************************/
 Acceleration::Acceleration(double ddx, double ddy)
 {
 
@@ -21,13 +26,18 @@ Acceleration::Acceleration(double ddx, double ddy)
 
 
 /***********************************************************************
- * Return the acceleration
- ************************************************************************/
+* GET DDX
+* Return the ddx
+************************************************************************/
 double Acceleration::getDDX()
 {
    return ddx;
 }
 
+/***********************************************************************
+* GET DDY
+* Return the ddy
+************************************************************************/
 double Acceleration::getDDY()
 {
    return ddy;

@@ -12,6 +12,7 @@ private:
    double ddy;
    
 public:
+   // constructors
    Acceleration();
    Acceleration(double ddx, double ddy);
 

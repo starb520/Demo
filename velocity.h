@@ -23,6 +23,7 @@ public:
    void setDX(double dx);
    void setDY(double dy);
 
+   // calculates the velocity
    double add(double accel, double time);
 
 

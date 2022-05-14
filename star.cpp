@@ -14,11 +14,10 @@ Star::Star()
 }
 
 
-Star::Star(const Point& ptUpperRight) : pt(random(20.0, 400.0), random(20.0, 400.0))
-   
+Star::Star(Point pt)  
 
 {
-   
+   this->pt = pt;
    phase = random(0, 255);  // this is high so the brightness of the star is high, once its working we can change it back to (0,255)
    
 }

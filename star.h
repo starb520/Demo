@@ -12,7 +12,7 @@ private:
 
 public:
    Star();
-   Star(const Point& ptUpperRight);
+   Star(Point pt);
    void reset(double width, double height);
    void draw(ogstream& gout) ;
 

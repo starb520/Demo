@@ -26,8 +26,8 @@ public:
           ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight),
           /*ptStar(random(20, 300), random(20, 300)),*/
-          ptStar(ptUpperRight.getX() - random(20,300), ptUpperRight.getY() - random(100,300)),
-          ptStar2(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(100, 300)),
+          //ptStar(ptUpperRight.getX() - random(20,300), ptUpperRight.getY() - random(100,300)),
+          //ptStar2(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(100, 300)),
           star1(ptUpperRight)
 
      
@@ -39,15 +39,20 @@ public:
       //Star star1(ptStar);
       for (int i = 0; i < 50; i++)
       {
-
-
-         Star starTest(ptUpperRight);
-         starList.push_back(starTest);
-     
+         Point pt;
+         bool onGround = true;
+         while (onGround)
+         {
+            Point  pt(random(0.0, 400.0), random(0.0, 400.0)); 
+            cout << pt;
+            if (ground.getElevation(pt) > 0)
+            {
+               Star starTest(pt);
+               starList.push_back(starTest);
+               onGround = false;
+            }
+         }
       }      
-
-      
-
       phase = random(0, 255);
    }
 
@@ -116,13 +121,13 @@ void callBack(const Interface *pUI, void * p)
    gout << "Speed (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // draw our little star
-   gout.drawStar(pDemo->ptStar, pDemo->phase++);
-   gout.drawStar(pDemo->ptStar2, pDemo->phase++);
+   //gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   //gout.drawStar(pDemo->ptStar2, pDemo->phase++);
 
    /*Star star1(const Point& ptUpperRight);*/
    // Draw a star using Star class
 
-   pDemo->star1.draw(gout);
+   //pDemo->star1.draw(gout);
 
    list<Star>::iterator it = pDemo->starList.begin();
    for (it = pDemo->starList.begin(); it != pDemo->starList.end(); ++it)

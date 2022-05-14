@@ -1,3 +1,21 @@
+/*************************************************************
+ * 1. Name:
+ *      Ben Painter and Star Balls
+ * 2. Assignment Name:
+ *      Lab 04: Apollo 11 Visuals
+ * 3. Assignment Description:
+ *      Simulate the Apollo 11 landing
+ * 4. What was the hardest part? Be as specific as possible.
+ *      The most difficult part for us was adding 50 stars to the simulation.
+ *      We were able to create a Star class and create an instance of it in 
+ *      the Demo main file, but it took a bit of troubleshooting to add fifty
+ *      of the stars. We're still a bit confused about the pDemo and ->.
+ * 5. How long did it take for you to complete the assignment?
+ *     It took us about 7 hours. We spent four hours using Zoom to talk about
+ *     the different things we needed to do and troubleshooting the stars. 
+ *     we both spent a lot of time individually working on the stars. 
+ *****************************************************************/
+
 /**********************************************************************
  * GL Demo
  * Just a simple program to demonstrate how to create an Open GL window, 

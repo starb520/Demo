@@ -24,19 +24,8 @@ public:
    Demo(const Point& ptUpperRight) :
           angle(0.0),
           ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
-          ground(ptUpperRight),
-          /*ptStar(random(20, 300), random(20, 300)),*/
-          //ptStar(ptUpperRight.getX() - random(20,300), ptUpperRight.getY() - random(100,300)),
-          //ptStar2(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(100, 300)),
-          star1(ptUpperRight)
-
-     
+          ground(ptUpperRight)     
    { 
-      //Star starArray[50] = { };
-      //Point ptStar;
-      //ptStar.setX(random(20, 300));
-      //ptStar.setY(random(20, 300));
-      //Star star1(ptStar);
       for (int i = 0; i < 50; i++)
       {
          Point pt;
@@ -44,7 +33,6 @@ public:
          while (onGround)
          {
             Point  pt(random(0.0, 400.0), random(0.0, 400.0)); 
-            cout << pt;
             if (ground.getElevation(pt) > 0)
             {
                Star starTest(pt);
@@ -53,7 +41,6 @@ public:
             }
          }
       }      
-      phase = random(0, 255);
    }
 
    // this is just for test purposes.  Don't make member variables public!
@@ -62,17 +49,7 @@ public:
    double angle;         // angle the LM is pointing
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
-   list<Star> starList;
-   Point ptStar;
-   Point ptStar2;
-   Star star1;
-
-   //star1(ptStar)
-   //ptStar(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(20, 300)),
-   
-
-
-   
+   list<Star> starList;  
 };
 
 /*************************************
@@ -120,15 +97,7 @@ void callBack(const Interface *pUI, void * p)
    gout.setPosition(Point(25.0, 340.0));
    gout << "Speed (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
 
-   // draw our little star
-   //gout.drawStar(pDemo->ptStar, pDemo->phase++);
-   //gout.drawStar(pDemo->ptStar2, pDemo->phase++);
-
-   /*Star star1(const Point& ptUpperRight);*/
-   // Draw a star using Star class
-
-   //pDemo->star1.draw(gout);
-
+   // draw our little stars
    list<Star>::iterator it = pDemo->starList.begin();
    for (it = pDemo->starList.begin(); it != pDemo->starList.end(); ++it)
    {

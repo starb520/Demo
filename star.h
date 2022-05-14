@@ -13,7 +13,6 @@ private:
 
    Point pt;
    char phase;
-   Point ptUpperRight;
 
 public:
    //constructors

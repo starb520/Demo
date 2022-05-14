@@ -45,13 +45,16 @@ double Acceleration::getDDY()
 
 
 /***********************************************************************
- * Use velocity to calculate acceleration
+ * Uses the change in x to calculate and update the ddx attribute.
  ************************************************************************/
 void Acceleration::setDDX(double dx)
 {
 
 }
 
+/***********************************************************************
+ * Uses the change in y to calculate and update the ddy attribute.
+ ************************************************************************/
 void Acceleration::setDDY(double dy)
 {
 

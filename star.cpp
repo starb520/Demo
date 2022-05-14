@@ -13,29 +13,31 @@ Star::Star()
 
 }
 
-
+/************************************
+* Star constructor.
+**************************************/
 Star::Star(Point pt)  
 
 {
    this->pt = pt;
-   phase = random(0, 255);  // this is high so the brightness of the star is high, once its working we can change it back to (0,255)
+   phase = random(0, 255); 
    
 }
  
+/************************************
+* Resets a star.
+**************************************/
 void Star::reset(double width, double height)
 {
 
 }
 
+/**********************************************
+* Uses the uiDraw drawStar method to put a star
+* on the screen.
+***********************************************/
 void Star::draw(ogstream& gout) 
 {
-  /* gout.drawStar(Point(random(0, 255), random(0, 255)), phase);*/
-  
-   //pt = Point(random(0, 255), random(0, 255));
-   //for (int i = 0; i < 2; i++)
-   //{    
-   //   gout.drawStar(pt, phase);   
-   //}
 
    gout.drawStar(pt, phase++);
 

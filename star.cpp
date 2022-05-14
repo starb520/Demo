@@ -8,18 +8,18 @@ using namespace std;
 * Star Class
 **************************************/
 
-//Star::Star()
-//{
-//
-//}
+Star::Star()
+{
+
+}
 
 
-Star::Star(const Point& ptUpperRight) : pt(random(20.0, 300.0), random(20.0, 300.0))
+Star::Star(const Point& ptUpperRight) : pt(random(20.0, 400.0), random(20.0, 400.0))
    
 
 {
    
-   phase = random(250, 255);  // this is high so the brightness of the star is high, once its working we can change it back to (0,255)
+   phase = random(0, 255);  // this is high so the brightness of the star is high, once its working we can change it back to (0,255)
    
 }
  
@@ -38,6 +38,6 @@ void Star::draw(ogstream& gout)
    //   gout.drawStar(pt, phase);   
    //}
 
-   gout.drawStar(pt, phase);
+   gout.drawStar(pt, phase++);
 
 }

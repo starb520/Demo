@@ -9,6 +9,7 @@
 #include "uiDraw.h"
 #include "ground.h"
 #include "star.h"
+#include <list>
 
 
 using namespace std;
@@ -25,8 +26,10 @@ public:
           ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight),
           /*ptStar(random(20, 300), random(20, 300)),*/
-          ptStar(ptUpperRight.getX() - random(20,300), ptUpperRight.getY() - random(20,300)),
+          ptStar(ptUpperRight.getX() - random(20,300), ptUpperRight.getY() - random(100,300)),
+          ptStar2(ptUpperRight.getX() - random(20, 300), ptUpperRight.getY() - random(100, 300)),
           star1(ptUpperRight)
+
      
    { 
       //Star starArray[50] = { };
@@ -34,15 +37,16 @@ public:
       //ptStar.setX(random(20, 300));
       //ptStar.setY(random(20, 300));
       //Star star1(ptStar);
-      //for (int i = 0; i < sizeof(starArray); i++)
-      //{
-      //   
-      //   //Star(ptStar);
-      //   
-      //}
-      //      
+      for (int i = 0; i < 50; i++)
+      {
 
 
+         Star starTest(ptUpperRight);
+         starList.push_back(starTest);
+     
+      }      
+
+      
 
       phase = random(0, 255);
    }
@@ -53,8 +57,9 @@ public:
    double angle;         // angle the LM is pointing
    unsigned char phase;  // phase of the star's blinking
    Ground ground;
-  /* Star starArray[50] = { };*/
+   list<Star> starList;
    Point ptStar;
+   Point ptStar2;
    Star star1;
 
    //star1(ptStar)
@@ -82,9 +87,9 @@ void callBack(const Interface *pUI, void * p)
 
    // move the ship around
    if (pUI->isRight())
-      pDemo->angle -= 0.1;
+      pDemo->ptLM.addX(1.0);
    if (pUI->isLeft())
-      pDemo->angle += 0.1;
+      pDemo->ptLM.addX(-1.0);
    if (pUI->isUp())
       pDemo->ptLM.addY(-1.0);
    if (pUI->isDown())
@@ -112,11 +117,18 @@ void callBack(const Interface *pUI, void * p)
 
    // draw our little star
    gout.drawStar(pDemo->ptStar, pDemo->phase++);
+   gout.drawStar(pDemo->ptStar2, pDemo->phase++);
 
    /*Star star1(const Point& ptUpperRight);*/
    // Draw a star using Star class
-   
+
    pDemo->star1.draw(gout);
+
+   list<Star>::iterator it = pDemo->starList.begin();
+   for (it = pDemo->starList.begin(); it != pDemo->starList.end(); ++it)
+   {
+      it->draw(gout);
+   }
 
   
 }

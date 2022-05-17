@@ -21,8 +21,8 @@ public:
    double getDDY();
 
    // use the change in velocity to calculate acceleration
-   void setDDX(double dx);
-   void setDDY(double dy);
+   void setDDX(double ddx);
+   void setDDY(double ddy);
 
 };
 

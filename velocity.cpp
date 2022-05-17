@@ -1,4 +1,5 @@
 #include "velocity.h"
+#include <cmath> // for sqrt
 
 /***********************************************************************
  * Velocity: change in position divided by time
@@ -32,11 +33,12 @@ double Velocity::getDY()
 
 
 /***********************************************************************
- * Returns value
+ * GetSpeed
+ * 
  ************************************************************************/
 double Velocity::getSpeed()
 {
-   return 0.0;
+   return sqrt((dx * dx) + (dy * dy));
 }
 
 /***********************************************************************
@@ -44,7 +46,7 @@ double Velocity::getSpeed()
  ************************************************************************/
 void Velocity::setDX(double dx)
 {
-
+   this->dx = dx;
 }
 
 /***********************************************************************
@@ -52,7 +54,7 @@ void Velocity::setDX(double dx)
  ************************************************************************/
 void Velocity::setDY(double dy)
 {
-
+   this->dy = dy;
 }
 
 /***********************************************************************
@@ -60,5 +62,5 @@ void Velocity::setDY(double dy)
  ************************************************************************/
 double Velocity::add(double accel, double time)
 {
-   return 0.0;
+   return getSpeed() + (accel * time);
 }

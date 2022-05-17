@@ -47,15 +47,15 @@ double Acceleration::getDDY()
 /***********************************************************************
  * Uses the change in x to calculate and update the ddx attribute.
  ************************************************************************/
-void Acceleration::setDDX(double dx)
+void Acceleration::setDDX(double ddx)
 {
-
+   this->ddx = ddx;
 }
 
 /***********************************************************************
  * Uses the change in y to calculate and update the ddy attribute.
  ************************************************************************/
-void Acceleration::setDDY(double dy)
+void Acceleration::setDDY(double ddy)
 {
-
+   this->ddy = ddy;
 }

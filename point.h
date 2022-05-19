@@ -37,8 +37,8 @@ public:
    }
 
    // setters
-   void setX(double x)       { this->x = x;           }
-   void setY(double y)       { this->y = y;           }
+   void setX(double x) { this->x =  x; }
+   void setY(double y) { this->y =  y; }
    void addX(double x) { this->x += x; }
    void addY(double y) { this->y += y; }
    Point & operator = (const Point & rhs)

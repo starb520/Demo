@@ -28,6 +28,7 @@
 #include "ground.h"
 #include "star.h"
 #include <list>
+#include <math.h> 
 
 
 using namespace std;
@@ -65,7 +66,6 @@ public:
    Point ptLM;           // location of the LM on the screen
    Point ptUpperRight;   // size of the screen
    double angle;         // angle the LM is pointing
-   unsigned char phase;  // phase of the star's blinking
    Ground ground;
    list<Star> starList;  
 };
@@ -93,7 +93,11 @@ void callBack(const Interface *pUI, void * p)
    if (pUI->isUp())
       pDemo->ptLM.addY(-1.0);
    if (pUI->isDown())
-      pDemo->ptLM.addY(1.0);
+   {
+      pDemo->ptLM.addY(cos(pDemo->angle) * 1);
+      pDemo->ptLM.addX(sin(pDemo->angle) * -1);
+   }
+      
 
    // draw the ground
    pDemo->ground.draw(gout);

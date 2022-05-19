@@ -2,6 +2,9 @@
 #include "point.h"
 #include "velocity.h"
 #include "uiDraw.h"
+#define WEIGHT 15103.00   // Weight in KG
+#define GRAVITY -1.625    // Vertical acceleration due to gravity, in m/s^2
+#define THRUST 45000.00   // Thrust of main engine, in Newtons (kg m/s^2)
 
 /***********************************************************************
  * Moon Lander: has all the details for the moon lander
@@ -15,9 +18,6 @@ private:
    double angle;
    Point ptUpperRight;
    double fuel;
-   double weight;
-   double thrust;
-   double g;
    
 public:
    // constructor

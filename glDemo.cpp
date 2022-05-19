@@ -90,13 +90,15 @@ void callBack(const Interface *pUI, void * p)
       pDemo->angle -= 0.1;
    if (pUI->isLeft())
       pDemo->angle += 0.1;
-   if (pUI->isUp())
-      pDemo->ptLM.addY(-1.0);
+   //if (pUI->isUp())
+      //pDemo->ptLM.addY(-1.0);
    if (pUI->isDown())
    {
-      pDemo->ptLM.addY(cos(pDemo->angle) * 1);
+      
+      pDemo->ptLM.addY(cos(pDemo->angle) * 3);
       pDemo->ptLM.addX(sin(pDemo->angle) * -1);
    }
+  // pDemo->ptLM.addY(-1.625);// is a constant gravity
       
 
    // draw the ground
@@ -113,7 +115,7 @@ void callBack(const Interface *pUI, void * p)
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 360.0));
-   gout << "Altitude (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+   gout << "Altitude (" << (int)pDemo->ptLM.getY() << ")" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 340.0));

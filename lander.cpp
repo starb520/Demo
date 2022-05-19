@@ -5,6 +5,12 @@
  ************************************************************************/
 Lander::Lander(Point ptUpperRight)
 {
+   status = false;
+   pt.setX(200);
+   pt.setY(350);
+   angle = 0.0;
+   this->ptUpperRight = ptUpperRight;
+   fuel = 10000.00;
 }
 
 /***********************************************************************

@@ -27,6 +27,7 @@
 #include "uiDraw.h"
 #include "ground.h"
 #include "star.h"
+#include "lander.h"
 #include <list>
 #include <math.h> 
 
@@ -67,6 +68,7 @@ public:
    Point ptUpperRight;   // size of the screen
    double angle;         // angle the LM is pointing
    Ground ground;
+   Lander lander(Point ptUpperRight);
    list<Star> starList;  
 };
 

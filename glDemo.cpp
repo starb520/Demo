@@ -28,6 +28,7 @@
 #include "ground.h"
 #include "star.h"
 #include "lander.h"
+#include "thrust.h"
 #include <list>
 #include <math.h> 
 
@@ -43,7 +44,8 @@ class Demo
 public:
    Demo(const Point& ptUpperRight) :
           angle(0.0),
-          ptLM(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
+          lander(ptUpperRight),
+          //lander.getPosition()(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight)     
    { 
       for (int i = 0; i < 50; i++)
@@ -64,11 +66,12 @@ public:
    }
 
    // this is just for test purposes.  Don't make member variables public!
-   Point ptLM;           // location of the LM on the screen
+   //Point lander.getPosition();           // location of the LM on the screen
    Point ptUpperRight;   // size of the screen
    double angle;         // angle the LM is pointing
    Ground ground;
-   Lander lander(Point ptUpperRight);
+   Lander lander;
+   Thrust thrust;
    list<Star> starList;  
 };
 
@@ -87,41 +90,31 @@ void callBack(const Interface *pUI, void * p)
    // is the first step of every single callback function in OpenGL. 
    Demo * pDemo = (Demo *)p;  
 
+   pDemo->thrust.set(*pUI);
+   pDemo->lander.input(*pUI);
    // move the ship around
-   if (pUI->isRight())
-      pDemo->angle -= 0.1;
-   if (pUI->isLeft())
-      pDemo->angle += 0.1;
-   //if (pUI->isUp())
-      //pDemo->ptLM.addY(-1.0);
-   if (pUI->isDown())
-   {
-      
-      pDemo->ptLM.addY(cos(pDemo->angle) * 3);
-      pDemo->ptLM.addX(sin(pDemo->angle) * -1);
-   }
-  // pDemo->ptLM.addY(-1.625);// is a constant gravity
+  // pDemo->lander.getPosition().addY(-1.625);// is a constant gravity
       
 
    // draw the ground
    pDemo->ground.draw(gout);
 
    // draw the lander and its flames
-   gout.drawLander(pDemo->ptLM /*position*/, pDemo->angle /*angle*/);
-   gout.drawLanderFlames(pDemo->ptLM, pDemo->angle, /*angle*/
+   gout.drawLander(pDemo->lander.getPosition() /*position*/, pDemo->angle /*angle*/);
+   gout.drawLanderFlames(pDemo->lander.getPosition(), pDemo->angle, /*angle*/
                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 380.0));
-   gout << "Fuel (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+   gout << "Fuel (" << (int)pDemo->lander.getPosition().getX() << ", " << (int)pDemo->lander.getPosition().getY() << ")" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 360.0));
-   gout << "Altitude (" << (int)pDemo->ptLM.getY() << ")" << "\n";
+   gout << "Altitude (" << (int)pDemo->lander.getPosition().getY() << ")" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 340.0));
-   gout << "Speed (" << (int)pDemo->ptLM.getX() << ", " << (int)pDemo->ptLM.getY() << ")" << "\n";
+   gout << "Speed (" << (int)pDemo->lander.getPosition().getX() << ", " << (int)pDemo->lander.getPosition().getY() << ")" << "\n";
 
    // draw our little stars
    list<Star>::iterator it = pDemo->starList.begin();
@@ -132,6 +125,8 @@ void callBack(const Interface *pUI, void * p)
 
   
 }
+
+
 
 /*********************************
  * Main is pretty sparse.  Just initialize

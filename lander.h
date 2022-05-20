@@ -2,6 +2,7 @@
 #include "point.h"
 #include "velocity.h"
 #include "uiDraw.h"
+#include "uiInteract.h"
 #define WEIGHT 15103.00   // Weight in KG
 #define GRAVITY -1.625    // Vertical acceleration due to gravity, in m/s^2
 #define THRUST 45000.00   // Thrust of main engine, in Newtons (kg m/s^2)
@@ -10,14 +11,18 @@
  * Moon Lander: has all the details for the moon lander
  ************************************************************************/
 
+ 
+
 class Lander
 {
 private:
-   bool status;
+   enum FlightStatus { FLYING, CRASHED, LANDED};
+   FlightStatus status;
    Point pt;
    double angle;
    Point ptUpperRight;
    double fuel;
+   Velocity v;
    
 public:
    // constructor
@@ -39,7 +44,7 @@ public:
    void draw(double thrust, ogstream gout);
 
    // converts the input into thrust
-   void input(double thrust);
+   void input(const Interface& pUI);
 
    // condition updates
    void coast();

@@ -1,4 +1,5 @@
 #pragma once
+#include "uiInteract.h"
 
 /***********************************************************************
  * Thrust (EngineStatus)
@@ -27,6 +28,6 @@ public:
    bool isCounter();
 
    // updates a member variable
-   void set(double UI);
+   void set( const Interface & pUI) ;
 };
 

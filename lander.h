@@ -23,6 +23,7 @@ private:
    Point ptUpperRight;
    double fuel;
    Velocity v;
+   double tThrust = THRUST / WEIGHT;
    
 public:
    // constructor
@@ -37,6 +38,7 @@ public:
    bool isFlying();
    Point getPosition();
    Velocity getVelocity();
+   double getAngle();
 
    // returns the fuel
    int getFuel();

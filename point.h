@@ -11,6 +11,8 @@
 #pragma once
 
 #include <iostream>
+#include "acceleration.h"
+#include "velocity.h"
 
 /*********************************************
  * POINT
@@ -41,6 +43,7 @@ public:
    void setY(double y) { this->y =  y; }
    void addX(double x) { this->x += x; }
    void addY(double y) { this->y += y; }
+   void add(Acceleration accel, Velocity vel, double time);
    Point & operator = (const Point & rhs)
    {
       x = rhs.x;

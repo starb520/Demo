@@ -20,6 +20,13 @@ Point::Point(double x, double y) : x(0.0), y(0.0)
    setY(y);
 }
 
+void Point::add(Acceleration accel, Velocity vel, double time)
+{
+   setX(x + (vel.getDX() * time) + (.5 * accel.getDDX() * (time * time)));
+   setY(y + (vel.getDY() * time) + (.5 * accel.getDDY() * (time * time)));
+
+}
+
 /******************************************
  * POINT insertion
  *       Display coordinates on the screen
@@ -46,3 +53,4 @@ std::istream & operator >> (std::istream & in, Point & pt)
    return in;
 }
    
+

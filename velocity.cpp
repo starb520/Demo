@@ -7,7 +7,8 @@
 
 Velocity::Velocity()
 {
-
+   dx = 0.0;;
+   dy = 0.0;
 }
 
 Velocity::Velocity(double dx, double dy)

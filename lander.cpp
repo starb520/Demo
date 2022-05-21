@@ -91,10 +91,10 @@ void Lander::input(const Interface& pUI)
    }
    if (pUI.isDown())
    {
-      Acceleration aThrust;
-      aThrust.setDDX(sin(angle) * v.getDY());
-      aThrust.setDDY(cos(angle) * v.getDX());
-      v.add(aThrust, 0.1);
+      //Acceleration aThrust;
+      //aThrust.setDDX(sin(angle) * v.getDY());
+      //aThrust.setDDY(cos(angle) * v.getDX());
+      //v.add(aThrust, 0.1);
       //pt.addY(cos(angle) * v.getDX());
       //pt.addX(sin(angle) * v.getDY());
    }
@@ -111,9 +111,15 @@ void Lander::input(const Interface& pUI)
    //v.setDX(v.getDX() + aGravity.getDDX() * 0.1);
    //v.setDY(v.getDY() + aGravity.getDDY() * 0.1);
 
+   Acceleration a;
+   
+   a.setDDX(a.computeHorizontalComp(angle, tThrust));
+   a.setDDY(a.computeVerticalComp(angle, tThrust) + GRAVITY);
    // update position according to velocity
-   pt.addX(v.getDX());
-   pt.addY(v.getDY());
+   //pt.addX(v.getDX());
+   //pt.addY(v.getDY());
+
+   pt.add(a, v, 0.1);
 
 }
 /***********************************************************************
@@ -122,6 +128,11 @@ void Lander::input(const Interface& pUI)
 Velocity Lander::getVelocity()
 {
    return v;
+}
+
+double Lander::getAngle()
+{
+   return angle;
 }
 
 /***********************************************************************

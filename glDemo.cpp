@@ -43,7 +43,7 @@ class Demo
 {
 public:
    Demo(const Point& ptUpperRight) :
-          angle(0.0),
+          //angle(0.0),
           lander(ptUpperRight),
           //lander.getPosition()(ptUpperRight.getX() / 2.0, ptUpperRight.getY() / 2.0),
           ground(ptUpperRight)     
@@ -68,7 +68,7 @@ public:
    // this is just for test purposes.  Don't make member variables public!
    //Point lander.getPosition();           // location of the LM on the screen
    Point ptUpperRight;   // size of the screen
-   double angle;         // angle the LM is pointing
+   //double angle;         // angle the LM is pointing
    Ground ground;
    Lander lander;
    Thrust thrust;
@@ -100,8 +100,8 @@ void callBack(const Interface *pUI, void * p)
    pDemo->ground.draw(gout);
 
    // draw the lander and its flames
-   gout.drawLander(pDemo->lander.getPosition() /*position*/, pDemo->angle /*angle*/);
-   gout.drawLanderFlames(pDemo->lander.getPosition(), pDemo->angle, /*angle*/
+   gout.drawLander(pDemo->lander.getPosition() /*position*/, pDemo->lander.getAngle()/*angle*/);
+   gout.drawLanderFlames(pDemo->lander.getPosition(), pDemo->lander.getAngle(), /*angle*/
                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen

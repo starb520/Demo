@@ -62,3 +62,14 @@ void Acceleration::setDDY(double ddy)
 {
    this->ddy = ddy;
 }
+
+double Acceleration::computeHorizontalComp(double angle, double thrust)
+{
+   return sin(angle) * thrust;
+}
+
+double Acceleration::computeVerticalComp(double angle, double thrust)
+{
+   // Compute y componenent of acceleration
+   return (cos(angle) * thrust);
+}

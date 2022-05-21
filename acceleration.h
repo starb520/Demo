@@ -1,4 +1,5 @@
 #pragma once
+#include <math.h> // Sin and Cos
 
 /***********************************************************************
  * Acceleration
@@ -23,6 +24,7 @@ public:
    // use the change in velocity to calculate acceleration
    void setDDX(double ddx);
    void setDDY(double ddy);
-
+   double computeHorizontalComp(double angle, double thrust);
+   double computeVerticalComp(double angle, double thrust);
 };
 

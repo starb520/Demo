@@ -30,10 +30,13 @@
 #include "lander.h"
 #include "thrust.h"
 #include <list>
+
 #include <math.h> 
+#include <iomanip>
 
 
 using namespace std;
+
 
 /*************************************************************************
  * Demo
@@ -50,6 +53,7 @@ public:
    { 
       for (int i = 0; i < 50; i++)
       {
+        
          Point pt;
          bool onGround = true;
          while (onGround)
@@ -95,6 +99,7 @@ void callBack(const Interface *pUI, void * p)
 
    pDemo->lander.input(*pUI, a);
    pDemo->lander.coast(a);
+   pDemo->lander.isLanded(pDemo->ground);
    // move the ship around
    //pDemo->lander.getPosition().addY(-1.625);// is a constant gravity
       
@@ -105,6 +110,12 @@ void callBack(const Interface *pUI, void * p)
 
 
 
+   // draw our little stars
+   list<Star>::iterator it = pDemo->starList.begin();
+   for (it = pDemo->starList.begin(); it != pDemo->starList.end(); ++it)
+   {
+      it->draw(gout);
+   }
 
 
    // draw the ground
@@ -118,22 +129,29 @@ void callBack(const Interface *pUI, void * p)
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 380.0));
-   gout << "Fuel (" << pDemo->lander.getFuel() << ")" << "\n";
+   gout << "Fuel:     " << pDemo->lander.getFuel() << " lbs" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 360.0));
-   gout << "Altitude (" << (int)pDemo->ground.getElevation(pDemo->lander.getPosition()) << ")" << "\n";
+   gout << "Altitude: " << (int)pDemo->ground.getElevation(pDemo->lander.getPosition()) << " meters" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 340.0));
-   gout << "Speed ("<<pDemo->lander.getVelocity().getSpeed() << ")" << "\n";
+   gout << setprecision(3) << "Speed:   "<<pDemo->lander.getVelocity().getSpeed() << " m/s" << "\n";
 
-   // draw our little stars
-   list<Star>::iterator it = pDemo->starList.begin();
-   for (it = pDemo->starList.begin(); it != pDemo->starList.end(); ++it)
+   if (pDemo->lander.isLanded(pDemo->ground))
    {
-      it->draw(gout);
+      gout.setPosition(Point(140.0, 300.0));
+      gout << "The Eagle has landed!\n";
    }
+
+   if (pDemo->lander.isDead(pDemo->ground))
+   {
+      gout.setPosition(Point(130.0, 300.0));
+      gout << "Houston, we have a problem!\n";
+   }
+
+
 
   
 }

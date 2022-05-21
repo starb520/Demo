@@ -7,12 +7,12 @@
 Lander::Lander(Point ptUpperRight)
 {
    status = FLYING;
-   pt.setX(200);
-   pt.setY(350);
+   pt.setX(400);
+   pt.setY(400);
    angle = 0.0;
    this->ptUpperRight = ptUpperRight;
-   fuel = 1000.00;
-   v.setDX(-1);
+   fuel = 5000.00;
+   v.setDX(-5);
    v.setDY(0);
 }
 
@@ -47,9 +47,20 @@ bool Lander::isDead(Ground ground)
 /***********************************************************************
  * Returns if the lunar module has landed.
  ************************************************************************/
-bool Lander::isLanded()
+bool Lander::isLanded(Ground ground)
 {
-   return false;
+   if (ground.onPlatform(pt, 20) && v.getSpeed() <= 4 && (angle > 6 || angle < 1))
+   {
+      status = LANDED;
+      v.setDX(0);
+      v.setDY(0);
+      angle = 0;
+      return true;
+   }
+   else 
+   {
+      return false;
+   }
 }
 
 /***********************************************************************

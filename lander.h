@@ -38,7 +38,7 @@ public:
 
    // stats of the ships condition
    bool isDead(Ground ground);
-   bool isLanded();
+   bool isLanded(Ground ground);
    bool isFlying();
    Point getPosition();
    Velocity getVelocity();

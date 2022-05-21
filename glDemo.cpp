@@ -2,7 +2,7 @@
  * 1. Name:
  *      Ben Painter and Star Balls
  * 2. Assignment Name:
- *      Lab 04: Apollo 11 Visuals
+ *      Lab 05: Apollo 11 Visuals
  * 3. Assignment Description:
  *      Simulate the Apollo 11 landing
  * 4. What was the hardest part? Be as specific as possible.

@@ -36,6 +36,7 @@ public:
    bool isLanded();
    bool isFlying();
    Point getPosition();
+   Velocity getVelocity();
 
    // returns the fuel
    int getFuel();

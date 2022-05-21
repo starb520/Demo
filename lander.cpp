@@ -91,23 +91,37 @@ void Lander::input(const Interface& pUI)
    }
    if (pUI.isDown())
    {
-      pt.addY(cos(angle) * 3);
-      pt.addX(sin(angle) * -1);
+      Acceleration aThrust;
+      aThrust.setDDX(sin(angle) * v.getDY());
+      aThrust.setDDY(cos(angle) * v.getDX());
+      v.add(aThrust, 0.1);
+      //pt.addY(cos(angle) * v.getDX());
+      //pt.addX(sin(angle) * v.getDY());
    }
    
    // create gravity (this is what if feels like to be a god)
-   Acceleration aGravity;
-   aGravity.setDDX(0.0);
-   aGravity.setDDY(-1.6);
+   //Acceleration aGravity;
+   //aGravity.setDDX(0.0);
+  // aGravity.setDDY(-1.6);
    
    // update velocity according to acceleration
-   v.setDX(v.getDX() + aGravity.getDDX() * 0.1);
-   v.setDY(v.getDY() + aGravity.getDDY() * 0.1);
+  // v.add(aGravity, 0.1);
+   //v.setDX(v.add(aGravity.getDDX(), 0.1));
+   //v.setDY(v.add(aGravity.getDDY(), 0.1));
+   //v.setDX(v.getDX() + aGravity.getDDX() * 0.1);
+   //v.setDY(v.getDY() + aGravity.getDDY() * 0.1);
 
    // update position according to velocity
    pt.addX(v.getDX());
    pt.addY(v.getDY());
 
+}
+/***********************************************************************
+ * Returns velocity
+ ************************************************************************/
+Velocity Lander::getVelocity()
+{
+   return v;
 }
 
 /***********************************************************************

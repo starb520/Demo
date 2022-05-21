@@ -62,7 +62,9 @@ void Velocity::setDY(double dy)
 /***********************************************************************
  * Velocity, add
  ************************************************************************/
-double Velocity::add(double accel, double time)
+void Velocity::add(Acceleration accel, double time)
 {
-   return getSpeed() + (accel * time);
+   //return getSpeed() + (accel * time);
+   dx = (dx + accel.getDDX() * time);
+   dy = (dy + accel.getDDY() * time);
 }

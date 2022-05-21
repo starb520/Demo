@@ -114,7 +114,7 @@ void callBack(const Interface *pUI, void * p)
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 340.0));
-   gout << "Speed (" << (int)pDemo->lander.getPosition().getX() << ", " << (int)pDemo->lander.getPosition().getY() << ")" << "\n";
+   gout << "Speed ("<<pDemo->lander.getVelocity().getSpeed() << ")" << "\n";
 
    // draw our little stars
    list<Star>::iterator it = pDemo->starList.begin();

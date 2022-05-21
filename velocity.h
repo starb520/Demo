@@ -27,8 +27,8 @@ public:
    void setDY(double dy);
 
    // calculates the velocity
-   double add(double accel, double time);
-
+   void add(Acceleration accel, double time);
+   
 
 };
 

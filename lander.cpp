@@ -11,7 +11,7 @@ Lander::Lander(Point ptUpperRight)
    pt.setY(350);
    angle = 0.0;
    this->ptUpperRight = ptUpperRight;
-   fuel = 10000.00;
+   fuel = 1000.00;
    v.setDX(-1);
    v.setDY(0);
 }
@@ -27,9 +27,20 @@ void Lander::reset()
 /***********************************************************************
  * Moon Lander: has all the details for the moon lander
  ************************************************************************/
-bool Lander::isDead()
+bool Lander::isDead(Ground ground)
 {
-   return false;
+   
+   if (ground.getElevation(pt) <= 0) {
+      status = CRASHED;
+      v.setDX(0);
+      v.setDY(0);
+      angle = M_PI;
+      return true;
+   }
+   else
+   {
+      return false;
+   }
 }
 
 
@@ -64,7 +75,7 @@ Point Lander::getPosition()
  ************************************************************************/
 int Lander::getFuel()
 {
-   return 0;
+   return fuel;
 }
 
 
@@ -78,30 +89,43 @@ void Lander::draw(double thrust, ogstream gout)
 /***********************************************************************
  * Lander input.
  ************************************************************************/
-void Lander::input(const Interface& pUI)
+void Lander::input(const Interface& pUI, Acceleration a)
 {
-   Acceleration a;
-   if (pUI.isRight())
-   {
-      angle -= 0.1;
-   }
-   //pDemo->angle -= 0.1;
-   if (pUI.isLeft())
-   {
-      angle += 0.1;
-   }
-   if (pUI.isDown())
-   {
-      //Acceleration aThrust;
-      //aThrust.setDDX(sin(angle) * v.getDY());
-      //aThrust.setDDY(cos(angle) * v.getDX());
-      //v.add(aThrust, 0.1);
-      //pt.addY(cos(angle) * v.getDX());
-      //pt.addX(sin(angle) * v.getDY());
-      a.setDDX(a.computeHorizontalComp(angle, tThrust));
-      a.setDDY(a.computeVerticalComp(angle, tThrust));
-   }
    
+
+   if (fuel > 0 && status == FLYING ) {
+      if (pUI.isRight())
+      {
+         angle -= 0.1;
+         angle = angle - floor(angle / (2.00 * M_PI)) * (2.00 * M_PI);
+         fuel -= 1;
+      }
+      //pDemo->angle -= 0.1;
+      if (pUI.isLeft())
+      {
+         fuel -= 1;
+         angle += 0.1;
+         angle = angle - floor(angle / (2.00 * M_PI)) * (2.00 * M_PI);
+      }
+      if (pUI.isDown())
+      {
+         //Acceleration aThrust;
+         //aThrust.setDDX(sin(angle) * v.getDY());
+         //aThrust.setDDY(cos(angle) * v.getDX());
+         //v.add(aThrust, 0.1);
+         //pt.addY(cos(angle) * v.getDX());
+         //pt.addX(sin(angle) * v.getDY());
+         a.setDDX(a.computeHorizontalComp(-angle, tThrust));
+         a.setDDY(a.computeVerticalComp(angle, tThrust));
+         fuel -= 10;
+      }
+   }
+   else
+   {
+      fuel = 0;
+   }
+   v.add(a, 0.1);
+   pt.add(a, v, 0.1);
    // create gravity (this is what if feels like to be a god)
    //Acceleration aGravity;
    //aGravity.setDDX(0.0);
@@ -113,17 +137,8 @@ void Lander::input(const Interface& pUI)
    //v.setDY(v.add(aGravity.getDDY(), 0.1));
    //v.setDX(v.getDX() + aGravity.getDDX() * 0.1);
    //v.setDY(v.getDY() + aGravity.getDDY() * 0.1);
-
    
-   a.setDDY(a.getDDY() + GRAVITY);
    
-   v.add(a, 0.1);
-   // update position according to velocity
-   //pt.addX(v.getDX());
-   //pt.addY(v.getDY());
-
-   pt.add(a, v, 0.1);
-
 }
 /***********************************************************************
  * Returns velocity
@@ -141,8 +156,19 @@ double Lander::getAngle()
 /***********************************************************************
  * Lander coast.
  ************************************************************************/
-void Lander::coast()
+void Lander::coast(Acceleration a)
 {
+   if (status == FLYING)
+   {
+      a.setDDY(a.getDDY() + GRAVITY);
+
+      v.add(a, 0.1);
+      // update position according to velocity
+      //pt.addX(v.getDX());
+      //pt.addY(v.getDY());
+
+      pt.add(a, v, 0.1);
+   }
 }
 
 /***********************************************************************

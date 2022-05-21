@@ -85,32 +85,44 @@ public:
 void callBack(const Interface *pUI, void * p)
 {
    ogstream gout;
+   Acceleration a;
 
    // the first step is to cast the void pointer into a game object. This
    // is the first step of every single callback function in OpenGL. 
    Demo * pDemo = (Demo *)p;  
 
-   pDemo->thrust.set(*pUI);
-   pDemo->lander.input(*pUI);
+   //pDemo->thrust.set(*pUI);
+
+   pDemo->lander.input(*pUI, a);
+   pDemo->lander.coast(a);
    // move the ship around
-  // pDemo->lander.getPosition().addY(-1.625);// is a constant gravity
+   //pDemo->lander.getPosition().addY(-1.625);// is a constant gravity
       
+
+
+
+
+
+
+
+
 
    // draw the ground
    pDemo->ground.draw(gout);
 
    // draw the lander and its flames
    gout.drawLander(pDemo->lander.getPosition() /*position*/, pDemo->lander.getAngle()/*angle*/);
-   gout.drawLanderFlames(pDemo->lander.getPosition(), pDemo->lander.getAngle(), /*angle*/
+   if (pDemo->lander.getFuel() > 0 && !pDemo->lander.isDead(pDemo->ground))
+      gout.drawLanderFlames(pDemo->lander.getPosition(), pDemo->lander.getAngle(), /*angle*/
                     pUI->isDown(), pUI->isLeft(), pUI->isRight());
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 380.0));
-   gout << "Fuel (" << (int)pDemo->lander.getPosition().getX() << ", " << (int)pDemo->lander.getPosition().getY() << ")" << "\n";
+   gout << "Fuel (" << pDemo->lander.getFuel() << ")" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 360.0));
-   gout << "Altitude (" << (int)pDemo->lander.getPosition().getY() << ")" << "\n";
+   gout << "Altitude (" << (int)pDemo->ground.getElevation(pDemo->lander.getPosition()) << ")" << "\n";
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 340.0));

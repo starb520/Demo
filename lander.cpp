@@ -80,6 +80,7 @@ void Lander::draw(double thrust, ogstream gout)
  ************************************************************************/
 void Lander::input(const Interface& pUI)
 {
+   Acceleration a;
    if (pUI.isRight())
    {
       angle -= 0.1;
@@ -97,6 +98,8 @@ void Lander::input(const Interface& pUI)
       //v.add(aThrust, 0.1);
       //pt.addY(cos(angle) * v.getDX());
       //pt.addX(sin(angle) * v.getDY());
+      a.setDDX(a.computeHorizontalComp(angle, tThrust));
+      a.setDDY(a.computeVerticalComp(angle, tThrust));
    }
    
    // create gravity (this is what if feels like to be a god)
@@ -111,10 +114,10 @@ void Lander::input(const Interface& pUI)
    //v.setDX(v.getDX() + aGravity.getDDX() * 0.1);
    //v.setDY(v.getDY() + aGravity.getDDY() * 0.1);
 
-   Acceleration a;
    
-   a.setDDX(a.computeHorizontalComp(angle, tThrust));
-   a.setDDY(a.computeVerticalComp(angle, tThrust) + GRAVITY);
+   a.setDDY(a.getDDY() + GRAVITY);
+   
+   v.add(a, 0.1);
    // update position according to velocity
    //pt.addX(v.getDX());
    //pt.addY(v.getDY());

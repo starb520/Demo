@@ -100,7 +100,8 @@ void callBack(const Interface *pUI, void * p)
 
    pDemo->lander.input(*pUI, a);
    pDemo->lander.coast(a);
-   pDemo->lander.isLanded(pDemo->ground);
+   pDemo->lander.land(pDemo->ground);
+   pDemo->lander.crash(pDemo->ground);
    // move the ship around
    //pDemo->lander.getPosition().addY(-1.625);// is a constant gravity
       
@@ -123,10 +124,10 @@ void callBack(const Interface *pUI, void * p)
    pDemo->ground.draw(gout);
 
    // draw the lander and its flames
-   gout.drawLander(pDemo->lander.getPosition() /*position*/, pDemo->lander.getAngle()/*angle*/);
-   if (pDemo->lander.getFuel() > 0 && !pDemo->lander.isDead(pDemo->ground))
-      gout.drawLanderFlames(pDemo->lander.getPosition(), pDemo->lander.getAngle(), /*angle*/
-                    pUI->isDown(), pUI->isLeft(), pUI->isRight());
+   pDemo->lander.draw(*pUI, gout);
+
+
+   
 
    // put some text on the screen
    gout.setPosition(Point(25.0, 380.0));

@@ -6,6 +6,14 @@
  ************************************************************************/
 Lander::Lander(Point ptUpperRight)
 {
+   reset(ptUpperRight);
+}
+
+/***********************************************************************
+ * Moon Lander: has all the details for the moon lander
+ ************************************************************************/
+void Lander::reset(Point ptUpperRight)
+{
    status = FLYING;
    pt.setX(400);
    pt.setY(400);
@@ -14,13 +22,7 @@ Lander::Lander(Point ptUpperRight)
    fuel = 5000.00;
    v.setDX(-5);
    v.setDY(0);
-}
-
-/***********************************************************************
- * Moon Lander: has all the details for the moon lander
- ************************************************************************/
-void Lander::reset()
-{
+   tThrust = THRUST / WEIGHT;
 }
 
 
@@ -30,17 +32,10 @@ void Lander::reset()
 bool Lander::isDead(Ground ground)
 {
    
-   if (ground.getElevation(pt) <= 0) {
-      status = CRASHED;
-      v.setDX(0);
-      v.setDY(0);
-      angle = M_PI;
+   if (ground.getElevation(pt) <= 0) 
       return true;
-   }
    else
-   {
       return false;
-   }
 }
 
 
@@ -49,18 +44,10 @@ bool Lander::isDead(Ground ground)
  ************************************************************************/
 bool Lander::isLanded(Ground ground)
 {
-   if (ground.onPlatform(pt, 20) && v.getSpeed() <= 4 && (angle > 6 || angle < 1))
-   {
-      status = LANDED;
-      v.setDX(0);
-      v.setDY(0);
-      angle = 0;
+   if (ground.onPlatform(pt, 20) && v.getSpeed() <= 4 && (angle > 5.78 || angle < .5))
       return true;
-   }
    else 
-   {
       return false;
-   }
 }
 
 /***********************************************************************
@@ -71,47 +58,35 @@ bool Lander::isFlying()
    return false;
 }
 
-
-/***********************************************************************
- *  Returns the position of the moon lander.
- ************************************************************************/
-Point Lander::getPosition()
-{
-   return pt;
-}
-
-
-/***********************************************************************
- *  Returns the fuel status of LM.
- ************************************************************************/
-int Lander::getFuel()
-{
-   return fuel;
-}
-
-
 /***********************************************************************
  * Draws the lunar module.
  ************************************************************************/
-void Lander::draw(double thrust, ogstream gout)
+void Lander::draw(const Interface& pUI, ogstream& gout)
 {
+   gout.drawLander(pt, angle);
+   if (fuel > 0 && status == FLYING)
+      gout.drawLanderFlames(pt, angle, 
+                            pUI.isDown(), pUI.isLeft(), pUI.isRight());
 }
+
+#include <cassert>
 
 /***********************************************************************
  * Lander input.
  ************************************************************************/
-void Lander::input(const Interface& pUI, Acceleration a)
+void Lander::input(const Interface& pUI,  Acceleration& a)
 {
    
 
-   if (fuel > 0 && status == FLYING ) {
+   if (fuel > 0 && status == FLYING ) 
+   {
       if (pUI.isRight())
       {
          angle -= 0.1;
          angle = angle - floor(angle / (2.00 * M_PI)) * (2.00 * M_PI);
          fuel -= 1;
       }
-      //pDemo->angle -= 0.1;
+
       if (pUI.isLeft())
       {
          fuel -= 1;
@@ -120,12 +95,8 @@ void Lander::input(const Interface& pUI, Acceleration a)
       }
       if (pUI.isDown())
       {
-         //Acceleration aThrust;
-         //aThrust.setDDX(sin(angle) * v.getDY());
-         //aThrust.setDDY(cos(angle) * v.getDX());
-         //v.add(aThrust, 0.1);
-         //pt.addY(cos(angle) * v.getDX());
-         //pt.addX(sin(angle) * v.getDY());
+         assert(a.getDDX() == 0.0);
+         assert(a.getDDY() == 0.0);
          a.setDDX(a.computeHorizontalComp(-angle, tThrust));
          a.setDDY(a.computeVerticalComp(angle, tThrust));
          fuel -= 10;
@@ -135,48 +106,22 @@ void Lander::input(const Interface& pUI, Acceleration a)
    {
       fuel = 0;
    }
-   v.add(a, 0.1);
-   pt.add(a, v, 0.1);
-   // create gravity (this is what if feels like to be a god)
-   //Acceleration aGravity;
-   //aGravity.setDDX(0.0);
-  // aGravity.setDDY(-1.6);
-   
-   // update velocity according to acceleration
-  // v.add(aGravity, 0.1);
-   //v.setDX(v.add(aGravity.getDDX(), 0.1));
-   //v.setDY(v.add(aGravity.getDDY(), 0.1));
-   //v.setDX(v.getDX() + aGravity.getDDX() * 0.1);
-   //v.setDY(v.getDY() + aGravity.getDDY() * 0.1);
-   
-   
-}
-/***********************************************************************
- * Returns velocity
- ************************************************************************/
-Velocity Lander::getVelocity()
-{
-   return v;
-}
 
-double Lander::getAngle()
-{
-   return angle;
+//   v.add(a, 0.1);
+//   pt.add(a, v, 0.1);  
+   
 }
 
 /***********************************************************************
  * Lander coast.
  ************************************************************************/
-void Lander::coast(Acceleration a)
+void Lander::coast(Acceleration & a)
 {
    if (status == FLYING)
    {
       a.setDDY(a.getDDY() + GRAVITY);
 
       v.add(a, 0.1);
-      // update position according to velocity
-      //pt.addX(v.getDX());
-      //pt.addY(v.getDY());
 
       pt.add(a, v, 0.1);
    }
@@ -185,14 +130,29 @@ void Lander::coast(Acceleration a)
 /***********************************************************************
  * Lander land.
  ************************************************************************/
-void Lander::land()
+void Lander::land(Ground ground)
 {
+   if (isLanded(ground))
+   {
+      status = LANDED;
+      v.setDX(0);
+      v.setDY(0);
+      angle = 0;
+   }
+
 }
 
  
 /***********************************************************************
  *  Detect collision.
  ************************************************************************/
-void Lander::crash()
+void Lander::crash(Ground ground)
 {
+   if (isDead(ground))
+   {
+      status = CRASHED;
+      v.setDX(0);
+      v.setDY(0);
+      angle = M_PI;
+   }
 }

@@ -14,9 +14,6 @@
 /***********************************************************************
  * Moon Lander: has all the details for the moon lander
  ************************************************************************/
-
- 
-
 class Lander
 {
 private:
@@ -27,36 +24,37 @@ private:
    Point ptUpperRight;
    double fuel;
    Velocity v;
-   double tThrust = THRUST / WEIGHT;
+   double tThrust;
    
 public:
    // constructor
    Lander(Point ptUpperRight);
 
    // resets the lander after crash/land
-   void reset();
+   void reset(Point ptUpperRight);
 
    // stats of the ships condition
    bool isDead(Ground ground);
    bool isLanded(Ground ground);
    bool isFlying();
-   Point getPosition();
-   Velocity getVelocity();
-   double getAngle();
 
-   // returns the fuel
-   int getFuel();
+
+   // return methods
+   Point getPosition()    { return pt;     }
+   Velocity getVelocity() { return v;      }
+   double getAngle()      { return angle;  }
+   int getFuel()          { return fuel;   }
 
    // draws Lander
-   void draw(double thrust, ogstream gout);
+   void draw(const Interface& pUI, ogstream& gout);
 
    // converts the input into thrust
-   void input(const Interface& pUI, Acceleration a);
+   void input(const Interface& pUI, Acceleration& a);
 
    // condition updates
-   void coast(Acceleration a);
-   void land();
-   void crash();
+   void coast(Acceleration & a);
+   void land(Ground ground);
+   void crash(Ground ground);
 
 };
 

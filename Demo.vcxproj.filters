@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="glDemo.cpp">
+    <ClCompile Include="game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ground.cpp">
@@ -37,9 +37,6 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="acceleration.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="thrust.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="lander.cpp">
@@ -66,9 +63,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="acceleration.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="thrust.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="lander.h">

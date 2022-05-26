@@ -1,5 +1,6 @@
 #include "lander.h"
 #include "acceleration.h"
+#include <cassert>
 
 /***********************************************************************
  * Moon Lander: has all the details for the moon lander
@@ -21,7 +22,7 @@ void Lander::reset(Point ptUpperRight)
    this->ptUpperRight = ptUpperRight;
    fuel = 5000.00;
    v.setDX(-5);
-   v.setDY(0);
+   v.setDY(1);
    tThrust = THRUST / WEIGHT;
 }
 
@@ -69,15 +70,13 @@ void Lander::draw(const Interface& pUI, ogstream& gout)
                             pUI.isDown(), pUI.isLeft(), pUI.isRight());
 }
 
-#include <cassert>
+
 
 /***********************************************************************
  * Lander input.
  ************************************************************************/
 void Lander::input(const Interface& pUI,  Acceleration& a)
 {
-   
-
    if (fuel > 0 && status == FLYING ) 
    {
       if (pUI.isRight())
@@ -86,7 +85,6 @@ void Lander::input(const Interface& pUI,  Acceleration& a)
          angle = angle - floor(angle / (2.00 * M_PI)) * (2.00 * M_PI);
          fuel -= 1;
       }
-
       if (pUI.isLeft())
       {
          fuel -= 1;
@@ -105,11 +103,7 @@ void Lander::input(const Interface& pUI,  Acceleration& a)
    else
    {
       fuel = 0;
-   }
-
-//   v.add(a, 0.1);
-//   pt.add(a, v, 0.1);  
-   
+   }   
 }
 
 /***********************************************************************

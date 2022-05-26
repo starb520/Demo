@@ -19,12 +19,12 @@ Star::Star()
 /************************************
 * Star constructor.
 **************************************/
-Star::Star(Point pt)  
-
-{
-   this->pt = pt;
-   phase = random(0, 255);
-}
+//Star::Star(Point pt)  
+//
+//{
+//   this->pt = pt;
+//   phase = random(0, 255);
+//}
  
 /************************************
 * Resets a star.

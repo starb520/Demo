@@ -12,9 +12,11 @@ using namespace std;
 /************************************
 * Star constructor.
 **************************************/
-Star::Star(Point ptUpperRight) 
+Star::Star() 
 {
-   reset(ptUpperRight);
+   pt.setX(random(0.0, 400.0));
+   pt.setY(random(0.0, 400.0));
+   phase = random(0, 255);
 }
 
 
@@ -26,7 +28,6 @@ void Star::reset(Point ptUpperRight)
 {
    pt.setX(random(0.0, ptUpperRight.getX()));
    pt.setY(random(0.0, ptUpperRight.getY()));
-   phase = random(0, 255);
 }
 
 /**********************************************

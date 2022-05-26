@@ -16,7 +16,7 @@ private:
 
 public:
    //constructors
-   Star(Point ptUpperRight);
+   Star();
 
    // resets the stars after crash/land
    void reset(Point ptUpperRight);

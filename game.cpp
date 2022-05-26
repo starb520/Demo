@@ -82,7 +82,7 @@ void callBack(const Interface *pUI, void * p)
    
 
    // draw our little stars
-   for (int i = 0; i < 50; i++)
+   for (int i = 0; i < 80; i++)
       pGame->starList[i].draw(gout);
 
    // draw the ground

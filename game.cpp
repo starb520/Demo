@@ -30,10 +30,10 @@
 #include "ground.h"
 #include "star.h"
 #include "lander.h"
-#include <list>
+#include <Windows.h> // for Sleep
+#include <list>      // for lists
+#include <iomanip>   // presicion
 
-#include <math.h> 
-#include <iomanip>
 
 
 using namespace std;
@@ -55,7 +55,7 @@ public:
    Point ptUpperRight;   // size of the screen
    Ground ground;
    Lander lander;
-   Star   starList[80];
+   Star   starList[80]; // a list of stars
 };
 
 /*************************************
@@ -77,6 +77,8 @@ void callBack(const Interface *pUI, void * p)
    // move the ship around
    pGame->lander.input(*pUI, a);
    pGame->lander.coast(a);
+
+   // check for updates
    pGame->lander.land(pGame->ground);
    pGame->lander.crash(pGame->ground);
    
@@ -103,16 +105,30 @@ void callBack(const Interface *pUI, void * p)
    gout.setPosition(Point(25.0, 340.0));
    gout << setprecision(3) << "Speed:   "<<pGame->lander.getVelocity().getSpeed() << " m/s" << "\n";
 
+   // put some text if lander lands
    if (pGame->lander.isLanded(pGame->ground))
    {
       gout.setPosition(Point(140.0, 300.0));
       gout << "The Eagle has landed!\n";
+
+      pGame->ground.reset();
+      pGame->lander.reset(pGame->ptUpperRight);
+      for (int i = 0; i < 80; i++)
+         pGame->starList[i].reset();
+      
    }
 
+   // put some text if lander crashed
    if (pGame->lander.isDead(pGame->ground))
    {
       gout.setPosition(Point(130.0, 300.0));
       gout << "Houston, we have a problem!\n";
+
+      Sleep(1000);
+      pGame->ground.reset();
+      pGame->lander.reset(pGame->ptUpperRight);
+      for (int i = 0; i < 80; i++)
+         pGame->starList[i].reset();
    }  
 }
 

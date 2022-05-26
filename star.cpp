@@ -14,8 +14,7 @@ using namespace std;
 **************************************/
 Star::Star() 
 {
-   pt.setX(random(0.0, 400.0));
-   pt.setY(random(0.0, 400.0));
+   reset();
    phase = random(0, 255);
 }
 
@@ -24,10 +23,10 @@ Star::Star()
 /************************************
 * Resets a star.
 **************************************/
-void Star::reset(Point ptUpperRight)
+void Star::reset()
 {
-   pt.setX(random(0.0, ptUpperRight.getX()));
-   pt.setY(random(0.0, ptUpperRight.getY()));
+   pt.setX(random(0.0, 400.0));
+   pt.setY(random(0.0, 400.0));
 }
 
 /**********************************************

@@ -19,7 +19,7 @@ public:
    Star();
 
    // resets the stars after crash/land
-   void reset(Point ptUpperRight);
+   void reset();
 
    // draws the star
    void draw(ogstream& gout) ;

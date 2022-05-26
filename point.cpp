@@ -20,6 +20,11 @@ Point::Point(double x, double y) : x(0.0), y(0.0)
    setY(y);
 }
 
+
+/*******************************************
+ * POINT Add 
+ *       Updates both X and Y of the position.
+ ********************************************/
 void Point::add(Acceleration accel, Velocity vel, double time)
 {
    setX(x + (vel.getDX() * time) + (.5 * accel.getDDX() * (time * time)));

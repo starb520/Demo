@@ -30,7 +30,6 @@
 #include "ground.h"
 #include "star.h"
 #include "lander.h"
-#include "thrust.h"
 #include <list>
 
 #include <math.h> 
@@ -56,7 +55,7 @@ public:
    Point ptUpperRight;   // size of the screen
    Ground ground;
    Lander lander;
-   Star starList[80];
+   Star   starList[80];
 };
 
 /*************************************

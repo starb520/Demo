@@ -16,11 +16,10 @@ private:
 
 public:
    //constructors
-   Star();
-   //Star(Point pt);
+   Star(Point ptUpperRight);
 
    // resets the stars after crash/land
-   void reset(double width, double height);
+   void reset(Point ptUpperRight);
 
    // draws the star
    void draw(ogstream& gout) ;

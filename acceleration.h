@@ -3,30 +3,31 @@
 
 /***********************************************************************
  * Acceleration
- * 
+ * Uses dX and dY to calculate the vertical 
+ * and horizontal components of the Lander.
  ************************************************************************/
 
 class Acceleration
 
 {
 private:
-   double ddx;
-   double ddy;
+   double ddx; // horizontal acceleration
+   double ddy; // vertical acceleration
    
 public:
    // constructors
    Acceleration();
    Acceleration(double ddx, double ddy);
 
-   // return the acceleration
+   // return acceleration
    double getDDX();
    double getDDY();
 
-   // use the change in velocity to calculate acceleration
+   // updates the ddX and ddY attributes 
    void setDDX(double ddx);
    void setDDY(double ddy);
 
-
+   // use the change in velocity to calculate acceleration
    double computeHorizontalComp(double angle, double thrust);
    double computeVerticalComp(double angle, double thrust);
 };

@@ -52,8 +52,8 @@ public:
    }
 
 private:
-   double x;           // horizontal position
-   double y;           // vertical position
+   double x;     // horizontal position
+   double y;     // vertical position
 };
 
 // stream I/O useful for debugging

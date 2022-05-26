@@ -18,7 +18,7 @@ Acceleration::Acceleration()
 
 /***********************************************************************
  * Acceleration
- * Another constructor
+ * A non-default constructor that takes in a ddx and ddy
  ************************************************************************/
 Acceleration::Acceleration(double ddx, double ddy)
 {
@@ -48,7 +48,7 @@ double Acceleration::getDDY()
 
 
 /***********************************************************************
- * Uses the change in x to calculate and update the ddx attribute.
+ * Updates the ddx attribute.
  ************************************************************************/
 void Acceleration::setDDX(double ddx)
 {
@@ -56,18 +56,24 @@ void Acceleration::setDDX(double ddx)
 }
 
 /***********************************************************************
- * Uses the change in y to calculate and update the ddy attribute.
+ * Updates the ddy attribute.
  ************************************************************************/
 void Acceleration::setDDY(double ddy)
 {
    this->ddy = ddy;
 }
 
+/***********************************************************************
+ * Uses dx to calculate ddx.
+ ************************************************************************/
 double Acceleration::computeHorizontalComp(double angle, double thrust)
 {
    return sin(angle) * thrust;
 }
 
+/***********************************************************************
+ * Uses dy to calculate ddy.
+ ************************************************************************/
 double Acceleration::computeVerticalComp(double angle, double thrust)
 {
    // Compute y componenent of acceleration

@@ -4,39 +4,19 @@
 /***********************************************************************
  * Velocity: change in position divided by time
  ************************************************************************/
-
-Velocity::Velocity()
-{
-   dx = 0.0;;
-   dy = 0.0;
-}
-
+ 
+ /***********************************************************************
+  * Velocity
+  * A non-default constructor that takes in a dx and dy
+  ************************************************************************/
 Velocity::Velocity(double dx, double dy)
 {
    this->dx = dx;
    this->dy = dy;
-
-}
-/***********************************************************************
- * Returns the dx value
- ************************************************************************/
-double Velocity::getDX()
-{
-   return dx;
 }
 
-
 /***********************************************************************
- * Returns the dy value
- ************************************************************************/
-double Velocity::getDY()
-{
-   return dy;
-}
-
-
-/***********************************************************************
- * GetSpeed
+ * Velocity GET SPEED
  * Calculate total speed
  ************************************************************************/
 double Velocity::getSpeed()
@@ -45,27 +25,11 @@ double Velocity::getSpeed()
 }
 
 /***********************************************************************
- * Updates the dx attribute
- ************************************************************************/
-void Velocity::setDX(double dx)
-{
-   this->dx = dx;
-}
-
-/***********************************************************************
- * Updates the dy attribute
- ************************************************************************/
-void Velocity::setDY(double dy)
-{
-   this->dy = dy;
-}
-
-/***********************************************************************
- * Velocity, add
+ * Velocity ADD
+ * Adds acceleration to the velocity
  ************************************************************************/
 void Velocity::add(Acceleration accel, double time)
 {
-   //return getSpeed() + (accel * time);
    dx = (dx + accel.getDDX() * time);
    dy = (dy + accel.getDDY() * time);
 }

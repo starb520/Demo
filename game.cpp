@@ -13,9 +13,7 @@
  *      the formulas to calculate the needed values was difficult
  *      to figure out.
  * 5. How long did it take for you to complete the assignment?
- *      
- * 
- * 
+ *      5 Hours 
  *****************************************************************/
 
 /**********************************************************************
@@ -30,10 +28,8 @@
 #include "ground.h"
 #include "star.h"
 #include "lander.h"
-#include <Windows.h> // for Sleep
-#include <list>      // for lists
 #include <iomanip>   // presicion
-
+#include <cassert>   // asserts
 
 
 using namespace std;
@@ -49,14 +45,15 @@ public:
    Game(const Point& ptUpperRight) :
           lander(ptUpperRight),
           ground(ptUpperRight)     
-
    {}
 
    Point ptUpperRight;   // size of the screen
    Ground ground;
    Lander lander;
-   Star   starList[80]; // a list of stars
+   Star   starArray[80]; // an array of stars
 };
+
+void resetGame(Game* pGame, const int lengthStars);
 
 /*************************************
  * All the interesting work happens here, when
@@ -74,6 +71,9 @@ void callBack(const Interface *pUI, void * p)
    // is the first step of every single callback function in OpenGL. 
    Game * pGame = (Game *)p;  
 
+   // finding length of array to be used for looping through the array of stars
+   int lengthStars = sizeof(pGame->starArray) / sizeof(pGame->starArray[0]);
+
    // move the ship around
    pGame->lander.input(*pUI, a);
    pGame->lander.coast(a);
@@ -85,8 +85,8 @@ void callBack(const Interface *pUI, void * p)
 
 
    // draw our little stars
-   for (int i = 0; i < 80; i++)
-      pGame->starList[i].draw(gout);
+   for (int i = 0; i < lengthStars; i++)
+      pGame->starArray[i].draw(gout);
 
    // draw the ground
    pGame->ground.draw(gout);
@@ -119,19 +119,32 @@ void callBack(const Interface *pUI, void * p)
    if (pGame->lander.isDead(pGame->ground))
    {
       gout.setPosition(Point(130.0, 300.0));
-      gout << "Houston, we have a problem!\n";
-      
+      gout << "Houston, we have a problem!\n";  
    }  
 
 
    // checking for reset
    if (pGame->lander.isFlying() == false && (*pUI).isUp())
    {
-      pGame->ground.reset();
-      pGame->lander.reset(pGame->ptUpperRight);
-      for (int i = 0; i < 80; i++)
-         pGame->starList[i].reset();
+      resetGame(pGame, lengthStars);
    }
+}
+
+
+/**********************************
+* RESET GAME
+* Resets all the values for Ground,
+* Lander, and Stars
+*************************************/
+
+void resetGame(Game *pGame,const int lengthStars)
+{
+   pGame->ground.reset();
+   pGame->lander.reset(pGame->ptUpperRight);
+   assert(pGame->lander.getAngle() == 0.0);   // checking that angle was reset
+   assert(pGame->lander.getFuel() == 5000.0); // checking that fuel was reset
+   for (int i = 0; i < lengthStars; i++)
+      pGame->starArray[i].reset();
 }
 
 

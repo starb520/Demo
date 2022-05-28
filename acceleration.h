@@ -16,16 +16,16 @@ private:
    
 public:
    // constructors
-   Acceleration();
+   Acceleration() : ddx(0.0), ddy(0.0) {};
    Acceleration(double ddx, double ddy);
 
    // return acceleration
-   double getDDX();
-   double getDDY();
+   double getDDX() const { return ddx; };
+   double getDDY() const { return ddy; };
 
    // updates the ddX and ddY attributes 
-   void setDDX(double ddx);
-   void setDDY(double ddy);
+   void setDDX(double ddx) { this->ddx = ddx; };
+   void setDDY(double ddy) { this->ddy = ddy; };
 
    // use the change in velocity to calculate acceleration
    double computeHorizontalComp(double angle, double thrust);

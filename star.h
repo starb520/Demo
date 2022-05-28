@@ -15,7 +15,7 @@ private:
    char phase;
 
 public:
-   //constructors
+   //constructor
    Star();
 
    // resets the stars after crash/land

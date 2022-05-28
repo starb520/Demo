@@ -3,10 +3,11 @@
 #include "velocity.h"
 #include "uiDraw.h"
 #include "uiInteract.h"
+#include "acceleration.h"
+#include "ground.h"
 #define _USE_MATH_DEFINES //Pi and Sqrt
 #include <cmath> // Pi and Sqrt
 #include <math.h> // Floor
-#include "ground.h"
 #define WEIGHT 15103.00   // Weight in KG
 #define GRAVITY -1.625    // Vertical acceleration due to gravity, in m/s^2
 #define THRUST 45000.00   // Thrust of main engine, in Newtons (kg m/s^2)
@@ -19,23 +20,23 @@ class Lander
 private:
    enum FlightStatus { FLYING, CRASHED, LANDED};
    FlightStatus status;
-   Point pt;
+   Point pt;      // point
    double angle;
    Point ptUpperRight;
    double fuel;
-   Velocity v;
-   double tThrust;
+   Velocity v;     // velocity
+   double tThrust; // total thrust
    
 public:
    // constructor
-   Lander(Point ptUpperRight);
+   Lander(const Point ptUpperRight);
 
    // resets the lander after crash/land
-   void reset(Point ptUpperRight);
+   void reset(const Point ptUpperRight);
 
    // stats of the ships condition
-   bool isDead(Ground ground);
-   bool isLanded(Ground ground);
+   bool isDead(const Ground ground);
+   bool isLanded(const Ground ground);
    bool isFlying();
 
 
@@ -43,7 +44,7 @@ public:
    Point getPosition()    { return pt;     }
    Velocity getVelocity() { return v;      }
    double getAngle()      { return angle;  }
-   int getFuel()          { return fuel;   }
+   double getFuel()       { return fuel;   }
 
    // draws Lander
    void draw(const Interface& pUI, ogstream& gout);
@@ -53,8 +54,8 @@ public:
 
    // condition updates
    void coast(Acceleration & a);
-   void land(Ground ground);
-   void crash(Ground ground);
+   void land(const Ground ground);
+   void crash(const Ground ground);
 
 };
 

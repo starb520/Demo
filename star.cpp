@@ -6,8 +6,9 @@ using namespace std;
 
 /************************************
 * Star Class
+* Stores the position and phase of 
+* a star and displays it
 **************************************/
-
 
 /************************************
 * Star constructor.
@@ -18,10 +19,9 @@ Star::Star()
    phase = random(0, 255);
 }
 
-
- 
 /************************************
-* Resets a star.
+* Star RESET
+* Resets a star position
 **************************************/
 void Star::reset()
 {
@@ -30,12 +30,11 @@ void Star::reset()
 }
 
 /**********************************************
+* Star DRAW
 * Uses the uiDraw drawStar method to put a star
 * on the screen.
 ***********************************************/
 void Star::draw(ogstream& gout) 
 {
-
    gout.drawStar(pt, phase++);
-
 }

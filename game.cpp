@@ -83,6 +83,7 @@ void callBack(const Interface *pUI, void * p)
    pGame->lander.crash(pGame->ground);
    
 
+
    // draw our little stars
    for (int i = 0; i < 80; i++)
       pGame->starList[i].draw(gout);
@@ -105,17 +106,13 @@ void callBack(const Interface *pUI, void * p)
    gout.setPosition(Point(25.0, 340.0));
    gout << setprecision(3) << "Speed:   "<<pGame->lander.getVelocity().getSpeed() << " m/s" << "\n";
 
+
+
    // put some text if lander lands
    if (pGame->lander.isLanded(pGame->ground))
    {
       gout.setPosition(Point(140.0, 300.0));
       gout << "The Eagle has landed!\n";
-
-      pGame->ground.reset();
-      pGame->lander.reset(pGame->ptUpperRight);
-      for (int i = 0; i < 80; i++)
-         pGame->starList[i].reset();
-      
    }
 
    // put some text if lander crashed
@@ -123,13 +120,18 @@ void callBack(const Interface *pUI, void * p)
    {
       gout.setPosition(Point(130.0, 300.0));
       gout << "Houston, we have a problem!\n";
+      
+   }  
 
-      Sleep(1000);
+
+   // checking for reset
+   if (pGame->lander.isFlying() == false && (*pUI).isUp())
+   {
       pGame->ground.reset();
       pGame->lander.reset(pGame->ptUpperRight);
       for (int i = 0; i < 80; i++)
          pGame->starList[i].reset();
-   }  
+   }
 }
 
 

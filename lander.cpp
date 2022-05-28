@@ -56,7 +56,10 @@ bool Lander::isLanded(Ground ground)
  ************************************************************************/
 bool Lander::isFlying()
 {
-   return false;
+   if (status == FLYING)
+      return true;
+   else
+      return false;
 }
 
 /***********************************************************************
